@@ -245,7 +245,7 @@ const Floor = () => {
 };
 
 export default function Models() {
-  const index = useContext(PageIndexContext);
+  const { index } = useContext(PageIndexContext);
 
   const variants = {
     out: {

@@ -6,7 +6,7 @@ import { PageIndexContext } from "@/app/page";
 import { animate } from "framer-motion";
 
 export default function Index() {
-  const index = useContext(PageIndexContext);
+  const { index, prevIndex } = useContext(PageIndexContext);
   const { loaded, total } = useProgress();
   const loadComplete = loaded === total;
 

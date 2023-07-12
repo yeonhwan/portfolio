@@ -5,16 +5,17 @@ import Index from "@/app/sections/Index/Index";
 import AboutMe from "@/app/sections/AboutMe/AboutMe";
 
 // hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDebounce } from "./hooks/useDebounce";
 import { createContext } from "react";
+import Skills from "./sections/Skills/Skills";
 
-export const PageIndexContext = createContext(0);
+export const PageIndexContext = createContext({ prevIndex: 0, index: 0 });
 
 export default function Home() {
   const [index, setIndex] = useState<0 | 1 | 2>(0);
-  const [indexPageMount, setIndexPageMount] = useState(true);
-  const [aboutPageMount, setAboutPageMount] = useState(false);
+  const [mountedPageIndex, setMountedPageIndex] = useState(0);
+  const prevIndex = useRef(0);
 
   useEffect(() => {
     // const mainEl = document.querySelector("main");
@@ -29,13 +30,27 @@ export default function Home() {
 
     if (index === 0) {
       setTimeout(() => {
-        setAboutPageMount(false);
-        setIndexPageMount(true);
+        setMountedPageIndex((state) => {
+          console.log(state);
+          prevIndex.current = state;
+          return 0;
+        });
       }, 600);
     } else if (index === 1) {
       setTimeout(() => {
-        setAboutPageMount(true);
-        setIndexPageMount(false);
+        setMountedPageIndex((state) => {
+          console.log(state);
+          prevIndex.current = state;
+          return 1;
+        });
+      }, 600);
+    } else if (index === 2) {
+      setTimeout(() => {
+        setMountedPageIndex((state) => {
+          console.log(state);
+          prevIndex.current = state;
+          return 2;
+        });
       }, 600);
     }
   }, [index]);
@@ -63,9 +78,11 @@ export default function Home() {
   return (
     <main
       className={`flex min-h-screen h-max overflow-y-auto overflow-x-hidden flex-col items-center justify-between`}>
-      <PageIndexContext.Provider value={index}>
-        {indexPageMount && <Index />}
-        {aboutPageMount && <AboutMe />}
+      <PageIndexContext.Provider
+        value={{ index, prevIndex: prevIndex.current }}>
+        {mountedPageIndex === 0 && <Index />}
+        {mountedPageIndex === 1 && <AboutMe />}
+        {mountedPageIndex === 2 && <Skills />}
       </PageIndexContext.Provider>
     </main>
   );
