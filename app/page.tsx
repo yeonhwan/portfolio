@@ -3,17 +3,18 @@
 // Components
 import Index from "@/app/sections/Index/Index";
 import AboutMe from "@/app/sections/AboutMe/AboutMe";
+import Skills from "./sections/Skills/Skills";
+import Projects from "./sections/Projects/Projects";
 
 // hooks
 import { useState, useEffect, useRef } from "react";
 import { useDebounce } from "./hooks/useDebounce";
 import { createContext } from "react";
-import Skills from "./sections/Skills/Skills";
 
 export const PageIndexContext = createContext({ prevIndex: 0, index: 0 });
 
 export default function Home() {
-  const [index, setIndex] = useState<0 | 1 | 2>(0);
+  const [index, setIndex] = useState<0 | 1 | 2 | 3>(0);
   const [mountedPageIndex, setMountedPageIndex] = useState(0);
   const prevIndex = useRef(0);
 
@@ -31,7 +32,6 @@ export default function Home() {
     if (index === 0) {
       setTimeout(() => {
         setMountedPageIndex((state) => {
-          console.log(state);
           prevIndex.current = state;
           return 0;
         });
@@ -39,28 +39,40 @@ export default function Home() {
     } else if (index === 1) {
       setTimeout(() => {
         setMountedPageIndex((state) => {
-          console.log(state);
           prevIndex.current = state;
           return 1;
         });
       }, 600);
-    } else if (index === 2) {
+    } else if (index === 2 && mountedPageIndex === 1) {
       setTimeout(() => {
         setMountedPageIndex((state) => {
-          console.log(state);
           prevIndex.current = state;
           return 2;
         });
       }, 600);
+    } else if (index === 2 && mountedPageIndex === 3) {
+      setTimeout(() => {
+        setMountedPageIndex((state) => {
+          prevIndex.current = state;
+          return 2;
+        });
+      }, 1000);
+    } else if (index === 3) {
+      setTimeout(() => {
+        setMountedPageIndex((state) => {
+          prevIndex.current = state;
+          return 3;
+        });
+      }, 1000);
     }
   }, [index]);
 
   const scrollCallback = (e: WheelEvent) => {
     const isScrollDown = e.deltaY > 0;
     if (isScrollDown) {
-      setIndex((state) => (state === 2 ? 2 : state + 1) as 0 | 1 | 2);
+      setIndex((state) => (state === 3 ? 3 : state + 1) as 0 | 1 | 2 | 3);
     } else {
-      setIndex((state) => (state === 0 ? 0 : state - 1) as 0 | 1 | 2);
+      setIndex((state) => (state === 0 ? 0 : state - 1) as 0 | 1 | 2 | 3);
     }
   };
   const debouncedScrollCallback = useDebounce<WheelEvent>(scrollCallback, 200);
@@ -83,6 +95,7 @@ export default function Home() {
         {mountedPageIndex === 0 && <Index />}
         {mountedPageIndex === 1 && <AboutMe />}
         {mountedPageIndex === 2 && <Skills />}
+        {mountedPageIndex === 3 && <Projects />}
       </PageIndexContext.Provider>
     </main>
   );

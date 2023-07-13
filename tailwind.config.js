@@ -20,6 +20,16 @@ module.exports = {
         suite: ["SUITE", "sans-serif"],
         nanum: ["NANUM", "serif"],
       },
+      animation: {
+        ripple: "ripple 1.5s linear infinite",
+      },
+      keyframes: {
+        ripple: {
+          "0%": { opacity: 0, scale: "0%" },
+          "50%": { opacity: 0.2 },
+          "100%": { opacity: 0, scale: "2000%" },
+        },
+      },
     },
   },
   plugins: [],

@@ -50,8 +50,10 @@ export default function Skills() {
   const [iconName, setIconName] = useState<string>();
   const [iconDesc, setIconDesc] = useState<string[]>();
 
+  console.log(index, prevIndex);
+
   useLayoutEffect(() => {
-    if (index === 2) {
+    if (index === 2 && prevIndex === 1) {
       animate([
         [
           ".info-container",
@@ -153,7 +155,21 @@ export default function Skills() {
           },
         ],
       ]);
-    } else {
+    } else if (index === 2 && prevIndex === 3) {
+      animate([
+        [".cover", { opacity: 0 }, { duration: 0 }],
+        [
+          ".outer-container",
+          { opacity: [0, 1], y: [50, 0] },
+          { type: "spring" },
+        ],
+        [
+          ".path-strokes",
+          { pathLength: [0, 1] },
+          { duration: 3, ease: "easeInOut", at: "-2" },
+        ],
+      ]);
+    } else if (index === 1) {
       animate(
         ".cover",
         { opacity: [0, 1] },
@@ -174,6 +190,52 @@ export default function Skills() {
         ],
         [".background", { opacity: [1, 0] }, { at: "-0.3" }],
       ]);
+    } else if (index === 3) {
+      animate([
+        [
+          ".outer-container",
+          { opacity: [1, 0] },
+          {
+            duration: 0.5,
+            type: "spring",
+            ease: "easeInOut",
+            opacity: { duration: 0.6 },
+          },
+        ],
+        [".curtain-container", { opacity: [0, 1] }, { at: "<" }],
+        [
+          ".curtain",
+          { opacity: [0, 1], width: ["0%", "14.285%"] },
+          { delay: stagger(0.05, { startDelay: 0 }) },
+        ],
+        // [
+        //   ".background",
+        //   {
+        //     scale: [1, 0.03],
+        //     transformOrigin: `${window.innerWidth / 2}px ${
+        //       window.innerHeight / 2
+        //     }px`,
+        //     borderRadius: ["0%", "100%"],
+        //   },
+        //   {
+        //     at: "-0.3",
+        //     duration: 1,
+        //     type: "spring",
+        //     damping: 16,
+        //     ease: "easeInOut",
+        //   },
+        // ],
+        // [
+        //   ".background",
+        //   {
+        //     y: ["0%", "-7%", "5%", "-100%"],
+        //   },
+        //   {
+        //     duration: 0.8,
+        //     ease: "easeInOut",
+        //   },
+        // ],
+      ]);
     }
   }, [index]);
 
@@ -182,8 +244,8 @@ export default function Skills() {
   }, [selectedIcon]);
 
   return (
-    <div className="relative overflow-hidden w-screen h-screen flex flex-col items-center">
-      <div className="absolute background bg-gradient-to-r from-orange-400 to-amber-800 w-[400%] h-[250%]"></div>
+    <div className="relative w-screen h-screen flex flex-col overflow-hidden items-center">
+      <div className="absolute background bg-orange-400 w-screen h-screen"></div>
       <div className="cover absolute w-[400%] h-[250%] bg-teal-600 translate-x-[0%] -translate-y-[20%] rotate-45"></div>
       <div className="outer-container flex w-[55%] h-full items-center justify-evenly z-50 py-20">
         <div className="content-container flex flex-col w-[50%] h-full justify-center text-white pt-0 pb-10">
@@ -398,6 +460,15 @@ export default function Skills() {
             src="/toolbox.png"
           />
         </div>
+      </div>
+      <div className="curtain-container absolute flex w-screen h-screen opacity-0">
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
+        <div className="curtain h-full bg-white w-1/7 z-50"></div>
       </div>
     </div>
   );
