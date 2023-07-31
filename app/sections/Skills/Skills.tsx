@@ -3,7 +3,7 @@ import { useLayoutEffect, useState, useEffect } from "react";
 
 import { useContext } from "react";
 import { PageIndexContext } from "@/app/page";
-import { frontendSkills } from "./frontSkills";
+import { frontendSkills } from "./FrontSkills";
 import { backendSkills } from "./BackSkills";
 import { tools } from "./Tools";
 
@@ -38,7 +38,6 @@ export type SkillListItem = {
   color: string;
   state: StateList;
   name: string;
-  desc: string[];
   level: 1 | 2 | 3;
 };
 
@@ -49,8 +48,6 @@ export default function Skills() {
   const [selectedIcon, setSelectedIcon] = useState<StateList>();
   const [iconName, setIconName] = useState<string>();
   const [iconDesc, setIconDesc] = useState<string[]>();
-
-  console.log(index, prevIndex);
 
   useLayoutEffect(() => {
     if (index === 2 && prevIndex === 1) {
@@ -208,231 +205,157 @@ export default function Skills() {
           { opacity: [0, 1], width: ["0%", "14.285%"] },
           { delay: stagger(0.05, { startDelay: 0 }) },
         ],
-        // [
-        //   ".background",
-        //   {
-        //     scale: [1, 0.03],
-        //     transformOrigin: `${window.innerWidth / 2}px ${
-        //       window.innerHeight / 2
-        //     }px`,
-        //     borderRadius: ["0%", "100%"],
-        //   },
-        //   {
-        //     at: "-0.3",
-        //     duration: 1,
-        //     type: "spring",
-        //     damping: 16,
-        //     ease: "easeInOut",
-        //   },
-        // ],
-        // [
-        //   ".background",
-        //   {
-        //     y: ["0%", "-7%", "5%", "-100%"],
-        //   },
-        //   {
-        //     duration: 0.8,
-        //     ease: "easeInOut",
-        //   },
-        // ],
       ]);
     }
   }, [index]);
-
-  useEffect(() => {
-    animate(".icon-name", { opacity: [0, 1] }, { duration: 0.5 });
-  }, [selectedIcon]);
 
   return (
     <div className="relative w-screen h-screen flex flex-col overflow-hidden items-center">
       <div className="absolute background bg-orange-400 w-screen h-screen"></div>
       <div className="cover absolute w-[400%] h-[250%] bg-teal-600 translate-x-[0%] -translate-y-[20%] rotate-45"></div>
-      <div className="outer-container flex w-[55%] h-full items-center justify-evenly z-50 py-20">
-        <div className="content-container flex flex-col w-[50%] h-full justify-center text-white pt-0 pb-10">
-          <div className="flex flex-col w-full h-[15%] justify-evenly mb-6">
-            <p className="list-name font-extrabold font-suite text-3xl">
+      <div className="outer-container flex flex-col-reverse md:flex-row w-full sm:w-[80%] xl:w-[70%] 2xl:w-[55%] h-full items-center justify-evenly z-50 py-14 xl:py-20">
+        <div className="content-container flex flex-col w-[93%] mobile:w-[90%] md:w-[50%] xl:w-[60%] 2xl:w-[50%] h-full md:justify-center text-white pt-0 md:pb-10">
+          <div className="flex flex-col w-full h-max justify-evenly mb-2 mobile:mb-6">
+            <p className="list-name font-extrabold font-suite text-xl sm:text-3xl mb-2">
               🧰 SKILLS
-            </p>
-            <p className="list-name font-suite text-sm my-2">
-              현재 까지 프로젝트 제작에 적용해본 경험이 있는 기술들입니다.
             </p>
             <p className="category text-white font-suite font-semibold mb-2">
               Frontend
             </p>
-            <ul className="flex w-full h-[50%] flex-wrap">
+            <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center mobile:gap-x-3 gap-y-2">
               {frontendSkills.map((skill) => {
-                const classname = `front-item flex items-center justify-center rounded-full w-7 h-7 ${skill.color} mr-2 mb-2 hover:cursor-pointer`;
+                const classname = `front-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li
-                    tabIndex={-1}
-                    animate={
-                      selectedIcon === skill.state
-                        ? { scale: 1.2 }
-                        : { scale: 1 }
-                    }
-                    className={classname}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedIcon(skill.state);
-                      setIconName(skill.name);
-                      setIconDesc(skill.desc);
-                      const descContainerEl = document.querySelector(
-                        ".desc"
-                      ) as HTMLElement;
-                      if (descContainerEl) {
-                        descContainerEl.focus();
+                  <motion.li className="flex flex-col w-full justify-center items-center">
+                    <motion.span
+                      tabIndex={-1}
+                      animate={
+                        selectedIcon === skill.state
+                          ? { scale: 1.2 }
+                          : { scale: 1 }
                       }
-                    }}
-                    whileHover={{
-                      scale: 1.2,
-                      rotate: [0, -10, 10, 0],
-                      transition: { duration: 0.3 },
-                    }}>
-                    {skill.icon}
+                      className={classname}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedIcon(skill.state);
+                        setIconName(skill.name);
+                        const descContainerEl = document.querySelector(
+                          ".desc"
+                        ) as HTMLElement;
+                        if (descContainerEl) {
+                          descContainerEl.focus();
+                        }
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.3 },
+                      }}>
+                      {skill.icon}
+                    </motion.span>
+                    <p className="sm:text-xs text-[8px] w-full text-center tool-item">
+                      {skill.name}
+                    </p>
                   </motion.li>
                 );
               })}
             </ul>
           </div>
-          <div className="flex flex-col w-full h-[10%] justify-evenly mb-10">
+          <div className="flex flex-col w-full h-max justify-evenly mb-10">
             <p className="category text-white font-suite font-semibold mb-2">
               Backend
             </p>
-            <ul className="flex w-full h-1/2">
+            <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center moible:gap-x-3 gap-y-2">
               {backendSkills.map((skill) => {
-                const classname = `back-item flex flex-col justify-center items-center mr-2 hover:cursor-pointer`;
+                const classname = `back-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li
-                    tabIndex={-1}
-                    className={classname}
-                    animate={
-                      selectedIcon === skill.state
-                        ? { scale: 1.2 }
-                        : { scale: 1 }
-                    }
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedIcon(skill.state);
-                      setIconName(skill.name);
-                      setIconDesc(skill.desc);
-                      const descContainerEl = document.querySelector(
-                        ".desc"
-                      ) as HTMLElement;
-                      if (descContainerEl) {
-                        descContainerEl.focus();
+                  <motion.li className="flex flex-col w-full justify-center items-center">
+                    <motion.span
+                      tabIndex={-1}
+                      className={classname}
+                      animate={
+                        selectedIcon === skill.state
+                          ? { scale: 1.2 }
+                          : { scale: 1 }
                       }
-                    }}
-                    whileHover={{
-                      scale: 1.2,
-                      rotate: [0, -10, 10, 0],
-                      transition: { duration: 0.3 },
-                    }}>
-                    <div
-                      className={`flex items-center justify-center w-7 h-7 rounded-full ${skill.color}`}>
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedIcon(skill.state);
+                        setIconName(skill.name);
+                        const descContainerEl = document.querySelector(
+                          ".desc"
+                        ) as HTMLElement;
+                        if (descContainerEl) {
+                          descContainerEl.focus();
+                        }
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.3 },
+                      }}>
                       {skill.icon}
-                    </div>
+                    </motion.span>
+                    <p className="sm:text-xs text-[8px] w-full text-center back-item">
+                      {skill.name}
+                    </p>
                   </motion.li>
                 );
               })}
             </ul>
           </div>
-          <div className="flex flex-col w-full h-[15%] justify-evenly mb-4">
-            <p className="list-name font-bold font-suite text-3xl">⚒️ TOOLS</p>
-            <p className="list-name font-suite text-sm my-2">
-              제가 웹 어플리케이션 제작에 사용하는 도구들입니다.
+          <div className="flex flex-col w-full h-max justify-evenly mb-4">
+            <p className="list-name font-bold font-suite text-xl sm:text-3xl mb-2">
+              ⚒️ TOOLS
             </p>
-            <ul className="flex w-full h-1/2">
+            <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center moible:gap-x-3 gap-y-2">
               {tools.map((skill) => {
-                const classname = `tool-item flex items-center justify-center rounded-full w-7 h-7 ${skill.color} mr-2 hover:cursor-pointer`;
+                const classname = `tool-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li
-                    tabIndex={-1}
-                    className={classname}
-                    animate={
-                      selectedIcon === skill.state
-                        ? { scale: 1.2 }
-                        : { scale: 1 }
-                    }
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedIcon(skill.state);
-                      setIconName(skill.name);
-                      setIconDesc(skill.desc);
-                      const descContainerEl = document.querySelector(
-                        ".desc"
-                      ) as HTMLElement;
-                      if (descContainerEl) {
-                        descContainerEl.focus();
+                  <motion.li className="flex flex-col w-full justify-center items-center">
+                    <motion.span
+                      tabIndex={-1}
+                      className={classname}
+                      animate={
+                        selectedIcon === skill.state
+                          ? { scale: 1.2 }
+                          : { scale: 1 }
                       }
-                    }}
-                    whileHover={{
-                      scale: 1.2,
-                      rotate: [0, -10, 10, 0],
-                      transition: { duration: 0.3 },
-                    }}>
-                    {skill.icon}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedIcon(skill.state);
+                        setIconName(skill.name);
+                        const descContainerEl = document.querySelector(
+                          ".desc"
+                        ) as HTMLElement;
+                        if (descContainerEl) {
+                          descContainerEl.focus();
+                        }
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: [0, -10, 10, 0],
+                        transition: { duration: 0.3 },
+                      }}>
+                      {skill.icon}
+                    </motion.span>
+                    <p className="sm:text-xs text-[8px] w-full text-center front-item">
+                      {skill.name}
+                    </p>
                   </motion.li>
                 );
               })}
             </ul>
           </div>
-          <motion.p
-            animate={selectedIcon ? { y: 0 } : { y: [0, -2, -5, -2, 0] }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "mirror",
-              duration: 0.5,
-              repeatDelay: 2,
-              ease: "easeOut",
-            }}
-            className="icon-name text text-white my-2 font-nanum">
-            {selectedIcon
-              ? iconName
-              : "👆 아이콘을 클릭하면 간단한 설명을 볼 수 있습니다."}
-          </motion.p>
-          <motion.ul
-            tabIndex={-1}
-            initial={{ height: "0%", opacity: 0 }}
-            transition={{
-              ease: "easeInOut",
-            }}
-            animate={
-              selectedIcon === undefined
-                ? { height: "0%", opacity: 0 }
-                : { height: "30%", opacity: 1 }
-            }
-            onBlur={(e) => {
-              if (e.relatedTarget?.nodeName !== "LI") {
-                setSelectedIcon(undefined);
-              }
-            }}
-            className="desc w-full h-[30%] bg-white/30 p-4 rounded-md focus:outline-none">
-            <AnimatePresence>
-              {selectedIcon &&
-                iconDesc &&
-                iconDesc.map((paragraph, i) => {
-                  return (
-                    <motion.li
-                      className="list-disc list-outside ml-3"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      key={`desc-${selectedIcon}-${i}`}
-                      transition={{ duration: 0.5 }}>
-                      {paragraph}
-                    </motion.li>
-                  );
-                })}
-            </AnimatePresence>
-          </motion.ul>
         </div>
-        <div className="info-container flex flex-col items-center justify-center w-[20%] h-[75%]">
+        <div className="info-container flex md:flex-col items-center justify-center w-max md:w-[20%] h-[35%] md:h-[75%]">
           <div className="w-82 h-max flex flex-col">
-            <p className="page-number w-full text-end text-6xl font-extrabold text-teal-500 z-50 mb-2">
+            <p className="page-number w-full text-end text-4xl sm:text-6xl font-extrabold text-teal-500 z-50 mb-2">
               2.
             </p>
             {/* skills */}
             <svg
-              className="z-50 w-40 path-box"
+              className="z-50 w-28 mobile:w-32 sm:w-40 path-box"
               viewBox="0 0 146 32"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
@@ -456,7 +379,7 @@ export default function Skills() {
               stiffness: 200,
               ease: "easeInOut",
             }}
-            className="w-82 toolbox origin-center mb-4"
+            className="toolbox w-28 mobile:w-32 sm:w-40 md:w-48 mb-4"
             src="/toolbox.png"
           />
         </div>

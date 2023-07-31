@@ -140,25 +140,25 @@ export default function AboutMe() {
 
   return (
     <div className="relative bg-black/90 overflow-hidden w-screen h-screen flex flex-col items-center">
-      <div className="outer-container flex w-[70%] h-full items-center justify-evenly z-50 py-20">
-        <div className="about-me flex flex-col items-center justify-center w-max h-[75%]">
+      <div className="outer-container flex flex-col md:flex-row md:w-[90%] xl:w-[70%] 2xl:w-[50%] h-full items-center justify-evenly z-50 py-14 xl:py-20">
+        <div className="about-me flex md:flex-col items-center justify-center w-full md:w-max h-[35%] md:h-[75%]">
           <div className="w-82 h-82 flex items-center justify-center">
             <motion.img
               initial={{ rotate: 0 }}
               whileHover={{ rotate: 10 }}
               transition={{ duration: 0.5, type: "spring" }}
-              className="w-82 profile origin-center mb-4"
+              className="mobile:w-32 w-24 sm:w-40 md:w-48 profile origin-[40%_50%] mb-4"
               src="/profile.png"
             />
           </div>
-          <div className="flex flex-col items-center justify-center w-max min-h-max h-1/3">
-            <p className="page-number w-full text-6xl font-extrabold text-orange-400 z-50 mb-2">
+          <div className="flex flex-col items-center justify-center w-max min-h-max h-full md:h-1/3">
+            <p className="page-number w-full text-4xl sm:text-6xl font-extrabold text-orange-400 z-50 mb-2">
               1.
             </p>
             {/* about me */}
             <div className="w-full h-max flex flex-col">
               <svg
-                className="z-50 w-56"
+                className="z-50 w-40 sm:w-56"
                 viewBox="0 0 228 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -176,12 +176,12 @@ export default function AboutMe() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-[50%] h-full justify-center">
-          <div className="content-container flex flex-col text-white w-full h-[35%] p-14 pb-0 mb-4">
-            <p className="font-nanum font-semibold text-2xl mb-2 text-orange-200">
+        <div className="flex flex-col w-[92%] sm:w-[70%] h-full justify-start md:justify-center">
+          <div className="content-container flex flex-col text-white min-h-max w-full md:p-14 py-8 mb-0 md:mb-4">
+            <p className="font-nanum font-semibold text-lg sm:text-2xl mb-2 text-orange-200">
               안녕하세요!
             </p>
-            <p className="font-suite mb-1">
+            <p className="font-suite mb-1 sm:text-base text-sm">
               새로운 걸 배워나가는 것이 가장 즐거운 신입
               <span className="fontsuite"> 프론트엔드 개발자&nbsp;</span>"
               <span className="font-suite font-bold text-cyan-300">
@@ -189,24 +189,26 @@ export default function AboutMe() {
               </span>
               " 입니다.
             </p>
-            <p className="font-suite mb-1">
+            <p className="font-suite mb-1 sm:text-base text-sm">
               막연히 PPT 만들기를 좋아했던 대학생이었던 저는 디자인을 통해
               무언가 만들어 볼 수 없을까 하는 생각 하나로 개발자의 길을 걷게
               되었습니다.
             </p>
-            <p className="font-suite mb-1">
+            <p className="font-suite mb-1 sm:text-base text-sm">
               프론트엔드의 역할을 디자인을 통해 어떻게 효과적으로 달성할 수
               있을지 고민하는 것을 좋아하고 개발 과정에서 동료들과의 소통과
               협력을 가장 중요한 가치로 생각합니다.
             </p>
-            <p className="font-suite mb-1">
+            <p className="font-suite mb-1 sm:text-base text-sm">
               현재는 기술과 이론을 학습하고, 토이 프로젝트들을 통해 적용하고
               있습니다.
             </p>
           </div>
-          <div className="content-container flex flex-col w-full h-[10%] px-14 mb-2">
-            <div className="flex items-center w-full h-1/2">
-              <p className="text-teal-300 font-semibold mr-4 w-24">Contacts</p>
+          <div className="content-container flex flex-col w-full h-max p-0 md:px-14 mb-4">
+            <div className="flex items-center w-full h-full">
+              <p className="text-teal-300 font-semibold mr-4 w-14 mobile:w-24 sm:text-base mobile:text-sm text-xs">
+                Contacts
+              </p>
               <Email
                 onClick={() => {
                   window.open("mailto:yeonhwan619@gmail.com");
@@ -227,43 +229,51 @@ export default function AboutMe() {
                 className="w-4 fill-white hover:cursor-pointer"
               />
             </div>
-            <div className="content-container flex w-full items-center text-white h-1/2">
-              <p className="font-semibold text-teal-300 mr-4 w-24">Keywords</p>
-              <p className="rounded-xl bg-orange-500 text-sm px-2 py-1 font-nanum mr-2">
-                성장하는
-              </p>
-              <p className="rounded-xl bg-red-400 text-sm px-2 py-1 font-nanum mr-2">
-                집요한
-              </p>
-              <p className="rounded-xl bg-teal-500 text-sm px-2 py-1 font-nanum mr-2">
-                활용하는
-              </p>
-              <p className="rounded-xl bg-indigo-500 text-sm px-2 py-1 font-nanum mr-2">
-                소통하는
-              </p>
-            </div>
           </div>
-          <div className="content-container flex flex-col w-full h-[18%] px-14">
-            <div className="w-full h-1/2 flex text-white">
-              <p className="font-semibold mb-1 text-teal-300 w-24 mr-4">
+          <div className="content-container max-h-max flex w-full items-center text-white h-max p-0 md:px-14 mb-4">
+            <p className="font-semibold text-teal-300 mr-4 w-14 mobile:w-24 sm:text-base mobile:text-sm text-xs">
+              Keywords
+            </p>
+            <p className="rounded-xl bg-orange-500 text-xs sm:text-sm px-2 py-1 font-nanum mr-2">
+              성장하는
+            </p>
+            <p className="rounded-xl bg-red-400 text-xs sm:text-sm px-2 py-1 font-nanum mr-2">
+              집요한
+            </p>
+            <p className="rounded-xl bg-teal-500 text-xs sm:text-sm px-2 py-1 font-nanum mr-2">
+              활용하는
+            </p>
+            <p className="rounded-xl bg-indigo-500 text-xs sm:text-sm px-2 py-1 font-nanum mr-2">
+              소통하는
+            </p>
+          </div>
+          <div className="content-container mb-4 md:mb-0 flex flex-col w-full h-max p-0 md:px-14">
+            <div className="w-full h-full flex text-white">
+              <p className="font-semibold mb-1 text-teal-300 w-14 mobile:w-24 mr-2 mobile:mr-4 sm:text-base mobile:text-sm text-xs">
                 Education
               </p>
               <div className="w-[45%] h-1/3 flex flex-col px-2">
-                <p className="font-nanum">
+                <p className="font-nanum text-[8px] mobile:text-xs sm:text-sm xl:text-base">
                   코드스테이츠 41<sup>th </sup>
                   SEB FE
                 </p>
-                <p className="font-nanum font-light text-xs">
+                <p className="font-nanum font-light text-[8px] mobile:text-xs">
                   2022 08 ~ 2023 02
                 </p>
-                <p className="font-nanum mb-4 text-sm">프론트엔드 과정 수료</p>
+                <p className="font-nanum mb-4 text-[8px] mobile:text-xs sm:text-sm">
+                  프론트엔드 과정 수료
+                </p>
               </div>
               <div className="w-[45%] h-1/3 flex flex-col px-2">
-                <p className="font-nanum">중앙대학교 영어영문학과</p>
-                <p className="font-nanum text-xs font-light">
+                <p className="font-nanum text-[8px] mobile:text-xs sm:text-sm xl:text-base">
+                  중앙대학교 영어영문학과
+                </p>
+                <p className="font-nanum text-[8px] mobile:text-xs font-light">
                   2015 03 ~ 2022 02
                 </p>
-                <p className="font-nanum text-sm">영어영문학사 졸업</p>
+                <p className="font-nanum text-[8px] mobile:text-xs sm:text-sm">
+                  영어영문학사 졸업
+                </p>
               </div>
             </div>
           </div>

@@ -15,10 +15,24 @@ module.exports = {
       backgroundSize: {
         "400%": "400%",
       },
+      backgroundImage: {
+        portfolio_horizon: "url('/cards/portfolio-horizon.png')",
+        crossout_horizon: "url('/cards/crossout-horizon.png')",
+        indiego_horizon: "url('/cards/indiego-horizon.png')",
+        mystck_horizon: "url('/cards/mystck-horizon.png')",
+        portfolio_mobile: "url('/cards/portfolio-mobile.png')",
+        crossout_mobile: "url('/cards/crossout-mobile.png')",
+        indiego_mobile: "url('/cards/indiego-mobile.png')",
+        mystck_mobile: "url('/cards/mystck-mobile.png')",
+      },
 
       fontFamily: {
         suite: ["SUITE", "sans-serif"],
         nanum: ["NANUM", "serif"],
+      },
+      screens: {
+        md: "900px",
+        mobile: "380px",
       },
       animation: {
         ripple: "ripple 1.5s linear infinite",
@@ -29,6 +43,9 @@ module.exports = {
           "50%": { opacity: 0.2 },
           "100%": { opacity: 0, scale: "2000%" },
         },
+      },
+      gridTemplateColumns: {
+        skills: "repeat(auto-fill, minmax(45px, 55px))",
       },
     },
   },

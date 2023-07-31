@@ -71,7 +71,7 @@ export default function Home() {
     const isScrollDown = e.deltaY > 0;
     if (isScrollDown) {
       setIndex((state) => (state === 3 ? 3 : state + 1) as 0 | 1 | 2 | 3);
-    } else {
+    } else if (!isScrollDown && e.deltaY !== 0) {
       setIndex((state) => (state === 0 ? 0 : state - 1) as 0 | 1 | 2 | 3);
     }
   };
@@ -89,7 +89,7 @@ export default function Home() {
 
   return (
     <main
-      className={`flex min-h-screen h-max overflow-y-auto overflow-x-hidden flex-col items-center justify-between`}>
+      className={`flex min-h-screen h-max overflow-hidden flex-col items-center justify-between`}>
       <PageIndexContext.Provider
         value={{ index, prevIndex: prevIndex.current }}>
         {mountedPageIndex === 0 && <Index />}
