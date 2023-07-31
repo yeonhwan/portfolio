@@ -40,20 +40,22 @@ export default function Index() {
     <div
       key="index-container"
       className="relative w-screen h-screen flex flex-col items-center bg-black/90">
-      <h1 className="hello absolute text-5xl w-max top-[6rem] font-extrabold text-white font-suite">
+      <h1 className="hello absolute text-4xl sm:text-5xl top-[6rem] font-extrabold text-white font-suite">
         반갑습니다 !
       </h1>
-      <h1 className="name-1 absolute text-3xl w-max top-[10rem] font-extrabold text-orange-400 font-suite">
+      <h1 className="name-1 absolute text-2xl sm:text-3xl w-max top-[9rem] sm:top-[10rem] font-extrabold text-orange-400 font-suite">
         프론트엔드 개발자
       </h1>
-      <h1 className="name-2 absolute text-4xl w-max top-[13rem] font-extrabold text-white font-suite">
+      <h1 className="name-2 absolute text-3xl sm:text-4xl w-max top-[11.5rem] sm:top-[13rem] font-extrabold text-white font-suite">
         &lt; <span className="text-4xl text-cyan-500">박연환&nbsp;</span>
         /&gt; 입니다.
       </h1>
-      <p className="scroll-info absolute text-lg w-max top-[18rem] text-neutral-400 font-suite">
+      <p className="scroll-info absolute text-sm sm:text-lg w-max top-[15rem] sm:top-[18rem] text-neutral-400 font-suite">
         스크롤을 밑으로 내려 내용을 확인해주세요.
       </p>
-      <Models />
+      <div className="absolute bottom-10 left-0 w-full h-[80%] sm:h-[90%] md:h-full">
+        <Models />
+      </div>
     </div>
   );
 }

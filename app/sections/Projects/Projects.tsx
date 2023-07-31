@@ -145,7 +145,7 @@ export default function Projects() {
         </div>
         <motion.div
           layout
-          className="flex flex-col lg:flex-row w-full md:w-[90%] max-w-[1500px] h-[80%] lg:h-[60%] justify-evenly items-center">
+          className="flex flex-col lg:flex-row w-full md:w-[90%] max-w-[1200px] h-[80%] lg:h-[60%] justify-evenly items-center">
           {cardsData.map((data) => {
             return (
               <Card

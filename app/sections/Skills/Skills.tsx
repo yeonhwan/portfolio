@@ -213,8 +213,8 @@ export default function Skills() {
     <div className="relative w-screen h-screen flex flex-col overflow-hidden items-center">
       <div className="absolute background bg-orange-400 w-screen h-screen"></div>
       <div className="cover absolute w-[400%] h-[250%] bg-teal-600 translate-x-[0%] -translate-y-[20%] rotate-45"></div>
-      <div className="outer-container flex flex-col-reverse md:flex-row w-full sm:w-[80%] xl:w-[70%] 2xl:w-[55%] h-full items-center justify-evenly z-50 py-14 xl:py-20">
-        <div className="content-container flex flex-col w-[93%] mobile:w-[90%] md:w-[50%] xl:w-[60%] 2xl:w-[50%] h-full md:justify-center text-white pt-0 md:pb-10">
+      <div className="outer-container flex flex-col-reverse md:flex-row w-full sm:w-[80%] xl:w-[70%] 2xl:w-[55%] h-full items-center justify-evenly z-50 py-10 mobile:py-14 xl:py-20">
+        <div className="content-container flex flex-col w-[93%] mobile:w-[90%] md:w-[50%] xl:w-[60%] 2xl:w-[50%] h-full justify-center mobile:justify-center md:justify-center text-white pt-0 md:pb-10">
           <div className="flex flex-col w-full h-max justify-evenly mb-2 mobile:mb-6">
             <p className="list-name font-extrabold font-suite text-xl sm:text-3xl mb-2">
               🧰 SKILLS
@@ -223,10 +223,12 @@ export default function Skills() {
               Frontend
             </p>
             <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center mobile:gap-x-3 gap-y-2">
-              {frontendSkills.map((skill) => {
+              {frontendSkills.map((skill, index) => {
                 const classname = `front-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li className="flex flex-col w-full justify-center items-center">
+                  <motion.li
+                    key={`front_${index}`}
+                    className="flex flex-col w-full justify-center items-center">
                     <motion.span
                       tabIndex={-1}
                       animate={
@@ -266,10 +268,12 @@ export default function Skills() {
               Backend
             </p>
             <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center moible:gap-x-3 gap-y-2">
-              {backendSkills.map((skill) => {
+              {backendSkills.map((skill, index) => {
                 const classname = `back-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li className="flex flex-col w-full justify-center items-center">
+                  <motion.li
+                    key={`back_${index}`}
+                    className="flex flex-col w-full justify-center items-center">
                     <motion.span
                       tabIndex={-1}
                       className={classname}
@@ -309,10 +313,12 @@ export default function Skills() {
               ⚒️ TOOLS
             </p>
             <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center moible:gap-x-3 gap-y-2">
-              {tools.map((skill) => {
+              {tools.map((skill, index) => {
                 const classname = `tool-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
                 return (
-                  <motion.li className="flex flex-col w-full justify-center items-center">
+                  <motion.li
+                    key={`tool_${index}`}
+                    className="flex flex-col w-full justify-center items-center">
                     <motion.span
                       tabIndex={-1}
                       className={classname}

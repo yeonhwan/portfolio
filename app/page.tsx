@@ -75,7 +75,7 @@ export default function Home() {
       setIndex((state) => (state === 0 ? 0 : state - 1) as 0 | 1 | 2 | 3);
     }
   };
-  const debouncedScrollCallback = useDebounce<WheelEvent>(scrollCallback, 200);
+  const debouncedScrollCallback = useDebounce<WheelEvent>(scrollCallback, 300);
 
   document.addEventListener(
     "wheel",

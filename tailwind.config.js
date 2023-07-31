@@ -45,7 +45,7 @@ module.exports = {
         },
       },
       gridTemplateColumns: {
-        skills: "repeat(auto-fill, minmax(45px, 55px))",
+        skills: "repeat(auto-fill, minmax(45px, 58px))",
       },
     },
   },
