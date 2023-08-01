@@ -4,9 +4,15 @@ import { useWindowWidth } from "@/app/hooks/useWindowWidth";
 import type { CardIndex } from "./Projects";
 import NextArrow from "public/icons/right.svg";
 import BackgArrow from "public/icons/back.svg";
-
+import LinkIcon from "public/icons/link.svg";
+import GithubIcon from "public/icons/github.svg";
 type OverlayProps = {
   isSelected: boolean;
+};
+
+export type Stack = {
+  icon: JSX.Element;
+  color: string;
 };
 
 export type CardData = {
@@ -20,6 +26,10 @@ export type CardData = {
   deploy?: string;
   repo?: string;
   team?: boolean;
+  link?: string;
+  gitHub?: string;
+  stacks: Stack[];
+  preventHastyClick: boolean;
 };
 
 type CardProps = CardData & {
@@ -36,6 +46,10 @@ export default function Card({
   imgs,
   descs,
   team,
+  preventHastyClick,
+  link,
+  gitHub,
+  stacks,
   setSelectedIndex,
 }: CardProps) {
   const [isSelected, setIsSelected] = useState(false);
@@ -63,7 +77,9 @@ export default function Card({
   return (
     <motion.div
       whileHover="hover"
-      className="card flex w-full h-[140px] lg:w-[250px] lg:h-[400px] relative group">
+      className={`card flex w-full h-[140px] lg:w-[250px] lg:h-[400px] relative group ${
+        preventHastyClick ? "pointer-events-none" : "pointer-events-auto"
+      }`}>
       <motion.div
         layoutRoot
         initial={{ scale: 1 }}
@@ -124,6 +140,7 @@ export default function Card({
                     {imgs.map((src, i) => {
                       return (
                         <motion.img
+                          key={`${title}_image_${i}`}
                           initial={{
                             opacity: imgIndex === i ? 0 : 1,
                           }}
@@ -169,15 +186,45 @@ export default function Card({
                   </button>
                 </div>
                 <div className="flex flex-col w-full h-[55%] p-4 text-white font-nanum">
-                  <p className="text-lg font-bold font-nanum">
+                  <p className="flex items-center text-lg font-bold font-nanum">
                     {title}
                     <sub className="text-xs font-nanum"> ({duration})</sub>
+                    {link && (
+                      <LinkIcon
+                        onClick={() => {
+                          window.open(link);
+                        }}
+                        className="fill-white w-4 ml-2 hover:fill-neutral-500 z-50"
+                      />
+                    )}
+                    {gitHub && (
+                      <GithubIcon
+                        onClick={() => {
+                          window.open(gitHub);
+                        }}
+                        className="fill-white w-5 ml-2 hover:fill-neutral-500 z-50"
+                      />
+                    )}
                   </p>
                   <div className="flex items-center mb-2">
                     <p className="font-bold font-suite mr-2">
                       {team ? "Team " : "Solo "}/
                     </p>
-                    <p className="text-sm font-suite">Stacks</p>
+                    <div className="flex w-max items-center text-sm font-suite">
+                      <p>Stacks</p>
+                      <ul className="flex w-14 justify-evenly items-center mx-2">
+                        {stacks.map((stack, index) => {
+                          const className = `w-5 h-5 rounded-full flex items-center justify-center ${stack.color}`;
+                          return (
+                            <span
+                              key={`${title}_stack_${index}`}
+                              className={className}>
+                              {stack.icon}
+                            </span>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   </div>
                   {descs.map((paragraph) => {
                     return (

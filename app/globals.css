@@ -22,6 +22,9 @@
 
   font-family: "NANUM";
   src: url("/fonts/nanum-variable.woff2");
+
+  font-family: "AKROBAT";
+  src: url("/fonts/Akrobat-Regular.woff2");
 }
 
 :root {

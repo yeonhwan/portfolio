@@ -26,6 +26,11 @@ export default function Index() {
         { opacity: [0, 1] },
         { delay: 2, duration: 1.5, repeat: Infinity, repeatType: "reverse" }
       );
+      animate(
+        ".scroll-dot",
+        { y: [-7, 0] },
+        { duration: 2, repeat: Infinity, repeatType: "loop" }
+      );
     } else {
       animate([
         [".hello", { opacity: [1, 0] }, { duration: 0.5 }],
@@ -50,8 +55,11 @@ export default function Index() {
         &lt; <span className="text-4xl text-cyan-500">박연환&nbsp;</span>
         /&gt; 입니다.
       </h1>
-      <p className="scroll-info absolute text-sm sm:text-lg w-max top-[15rem] sm:top-[18rem] text-neutral-400 font-suite">
+      <p className="flex items-center scroll-info absolute text-sm sm:text-lg w-max h-max top-[15rem] sm:top-[18rem] text-neutral-400 font-suite">
         스크롤을 밑으로 내려 내용을 확인해주세요.
+        <span className="relative rounded-full border border-neutral-400 w-4 h-5 px-1 mx-2">
+          <span className="scroll-dot absolute rounded-full bg-neutral-400 w-[3px] h-[3px] top-1/2 left-[5px]"></span>
+        </span>
       </p>
       <div className="absolute bottom-10 left-0 w-full h-[80%] sm:h-[90%] md:h-full">
         <Models />

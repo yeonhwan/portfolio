@@ -1,6 +1,10 @@
 import type { CardData } from "./Card";
+import ReactIcon from "/public/icons/react.svg";
+import JavascriptIcon from "/public/icons/javascript.svg";
+import TypescriptIcon from "/public/icons/typescript.svg";
+import NextIcon from "/public/icons/next.svg";
 
-export const cardsData: CardData[] = [
+export const cardsData: Omit<CardData, "preventHastyClick">[] = [
   {
     thumbnail_vert: "/cards/portfolio-vert.png",
     thumbnail_horizon: "/cards/portfolio-horizon.png",
@@ -21,6 +25,17 @@ export const cardsData: CardData[] = [
       "React Three Fiber 를 통해서 첫 화면의 모델링을 구현하여 표현하였습니다.",
       "Tailwind CSS 시스템을 활용해 디자인 및 CSS를 작성하였습니다.",
       "Framer Motion을 통해서 간단한 트랜지션 부터 보다 복잡한 애니메이션을 구현하였습니다.",
+    ],
+    gitHub: "https://github.com/yeonhwan/portfolio",
+    stacks: [
+      {
+        icon: <NextIcon className="w-3 h-3 fill-white" />,
+        color: "bg-black",
+      },
+      {
+        icon: <TypescriptIcon className="w-3 h-3 fill-white" />,
+        color: "bg-blue-500",
+      },
     ],
   },
   {
@@ -50,6 +65,18 @@ export const cardsData: CardData[] = [
       "배포는 Vercel을 통해서 진행했고, PlanetScale 을 통해 DB 를 관리하였습니다.",
       "크로스아웃은 모바일 기기의 웹 브라우저 및 PWA 형태로 다운로드 받아 사용할 수 있습니다.",
     ],
+    link: "https://crossout.vercel.app",
+    gitHub: "https://github.com/yeonhwan/crossout",
+    stacks: [
+      {
+        icon: <NextIcon className="w-3 h-3 fill-white" />,
+        color: "bg-black",
+      },
+      {
+        icon: <TypescriptIcon className="w-3 h-3 fill-white" />,
+        color: "bg-blue-500",
+      },
+    ],
   },
   {
     thumbnail_vert: "/cards/indiego-vert.png",
@@ -77,6 +104,18 @@ export const cardsData: CardData[] = [
       "프로젝트 개발기간 종료 후 실제 서비스 환경을 상정하여 유지 보수 및 베타 테스트를 진행했습니다.",
     ],
     team: true,
+    link: "https://indiego.site",
+    gitHub: "https://github.com/indiego-project",
+    stacks: [
+      {
+        icon: <ReactIcon className="w-3 h-3 fill-white" />,
+        color: "bg-cyan-500",
+      },
+      {
+        icon: <JavascriptIcon className="w-3 h-3 fill-white" />,
+        color: "bg-yellow-500",
+      },
+    ],
   },
   {
     thumbnail_vert: "/cards/mystck-vert.png",
@@ -98,6 +137,17 @@ export const cardsData: CardData[] = [
       "백엔드 API에 데이터를 요청하고 적절하게 화면에 디스플레이 하는 연습을 하였습니다.",
       "프론트엔드 검색, 페이지네이션, 질문 글 작성 및 유효성 검사 기능을 개발하였습니다.",
       "모든 페이지는 반응형 디자인을 적용하였습니다.",
+    ],
+    gitHub: "https://github.com/codestates-seb/seb41_pre_037",
+    stacks: [
+      {
+        icon: <ReactIcon className="w-3 h-3 fill-white" />,
+        color: "bg-cyan-500",
+      },
+      {
+        icon: <JavascriptIcon className="w-3 h-3 fill-white" />,
+        color: "bg-yellow-500",
+      },
     ],
   },
 ];

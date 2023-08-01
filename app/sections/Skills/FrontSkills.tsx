@@ -7,9 +7,7 @@ import NextIcon from "/public/icons/next.svg";
 import TailwindIcon from "/public/icons/tailwind.svg";
 import StyledComponentsIcon from "/public/icons/styledcomponents.svg";
 import FramerIcon from "/public/icons/framer.svg";
-import MUIIcon from "/public/icons/mui.svg";
 import WebPackIcon from "/public/icons/webpack.svg";
-import SCSSIcon from "/public/icons/sass.svg";
 import ReactQueryIcon from "/public/icons/reactquery.svg";
 
 import type { SkillListItem } from "./Skills";

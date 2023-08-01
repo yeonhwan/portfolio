@@ -11,6 +11,7 @@ export type CardIndex = undefined | 1 | 2 | 3 | 4;
 export default function Projects() {
   const { index, prevIndex } = useContext(PageIndexContext);
   const [selectedIndex, setSelectedIndex] = useState<CardIndex>();
+  const [preventHastyClick, setPreventHastyClick] = useState(true);
 
   useLayoutEffect(() => {
     if (index === 3) {
@@ -35,7 +36,9 @@ export default function Projects() {
           { opacity: [0, 1], y: [20, 0] },
           { type: "spring", delay: stagger(0.1, { startDelay: 0.05 }) },
         ],
-      ]);
+      ]).then(() => {
+        setPreventHastyClick(false);
+      });
     } else {
       animate([
         [".outer-container", { opacity: [1, 0] }, { duration: 0.2 }],
@@ -72,7 +75,7 @@ export default function Projects() {
           d="M837.373 1078.51L836.878 1078.55L836.505 1078.88C808.141 1104 764.417 1122.88 713.218 1135.89C662.052 1148.89 603.567 1155.98 545.817 1157.62C488.066 1159.26 431.099 1155.44 382.971 1146.64C334.781 1137.82 295.674 1124.05 273.448 1105.93C245.773 1083.38 216.068 1063.05 186.864 1043.06C184.934 1041.74 183.006 1040.42 181.081 1039.1C150.006 1017.81 119.693 996.775 93.0663 973.639C39.8579 927.405 1.5 872.907 1.5 791.597C1.5 762.27 8.6809 722.33 20.7288 677.323C32.77 632.341 49.6466 582.392 68.9799 533.08C107.666 434.406 156.11 338.483 195.213 290.039C251.871 219.845 304.643 185.352 382.688 151.594C416.09 137.146 454.101 122.842 499.037 105.931C506.655 103.064 514.473 100.122 522.5 97.0922C577.865 76.1944 643.185 51.1137 722.088 17.4766C758.995 1.74333 805.005 -0.693199 854.578 5.54605C904.131 11.7828 957.109 26.671 1007.85 45.4479C1109.37 83.0117 1201.72 136.048 1239.57 166.174L1239.8 166.362L1240.09 166.444C1303.78 184.357 1397.55 238.583 1475.38 325.486C1553.19 412.358 1615 531.79 1615 680.097C1615 751.874 1583.06 811.228 1530.88 860.298C1478.67 909.394 1406.25 948.152 1325.47 978.628C1163.91 1039.58 969.322 1067.26 837.373 1078.51Z"
           stroke="#eaeaea"
           opacity={0.5}
-          stroke-width="2"
+          strokeWidth="2"
         />
       </svg>
       <div className="outer-container w-screen h-screen flex flex-col items-center px-10 py-5 mobile:px-20 mobile:py-8 md:py-20">
@@ -145,10 +148,11 @@ export default function Projects() {
         </div>
         <motion.div
           layout
-          className="flex flex-col lg:flex-row w-full md:w-[90%] max-w-[1200px] h-[80%] lg:h-[60%] justify-evenly items-center">
-          {cardsData.map((data) => {
+          className="relative flex flex-col lg:flex-row w-full md:w-[90%] max-w-[1200px] h-[80%] lg:h-[60%] justify-evenly items-center">
+          {cardsData.map((data, index) => {
             return (
               <Card
+                key={`project_${index}`}
                 selectedIndex={selectedIndex}
                 thumbnail_vert={data.thumbnail_vert}
                 thumbnail_horizon={data.thumbnail_horizon}
@@ -158,7 +162,11 @@ export default function Projects() {
                 imgs={data.imgs}
                 descs={data.descs}
                 team={data.team}
+                link={data.link}
+                gitHub={data.gitHub}
+                stacks={data.stacks}
                 setSelectedIndex={setSelectedIndex}
+                preventHastyClick={preventHastyClick}
               />
             );
           })}

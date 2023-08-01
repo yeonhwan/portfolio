@@ -28,7 +28,8 @@ module.exports = {
 
       fontFamily: {
         suite: ["SUITE", "sans-serif"],
-        nanum: ["NANUM", "serif"],
+        nanum: ["NANUM", "sans-serif"],
+        akrobat: ["AKROBAT", "sans-serif"],
       },
       screens: {
         md: "900px",
