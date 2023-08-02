@@ -8,16 +8,18 @@ Title: Workspace
 */
 
 import React, { useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { useGLTF } from "@react-three/drei";
 
-const Table = (props) => {
-  const group = useRef();
-  const { nodes, materials, animations } = useGLTF(
+const Table = () => {
+  const group = useRef(null);
+  const { nodes, materials } = useLoader(
+    GLTFLoader,
     "/models/workspace/scene.gltf"
   );
-  const { actions } = useAnimations(animations, group);
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} dispose={null}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
           <group

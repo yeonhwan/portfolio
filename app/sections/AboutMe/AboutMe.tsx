@@ -1,9 +1,9 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { PageIndexContext } from "@/app/page";
-import { useAnimate, stagger } from "framer-motion";
+import { stagger } from "framer-motion";
 
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import { animate } from "framer-motion";
 
 //Icons
@@ -148,7 +148,7 @@ export default function AboutMe() {
               whileHover={{ rotate: 10 }}
               transition={{ duration: 0.5, type: "spring" }}
               className="mobile:w-32 w-24 sm:w-40 md:w-48 profile origin-[40%_50%] mb-4"
-              src="/profile.png"
+              src="/me_hello.png"
             />
           </div>
           <div className="flex flex-col items-center justify-center w-max min-h-max h-full md:h-1/3">

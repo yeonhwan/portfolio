@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { animate, delay, stagger, motion } from "framer-motion";
+import { animate, stagger, motion } from "framer-motion";
 import { useContext } from "react";
 import { PageIndexContext } from "@/app/page";
 
@@ -9,7 +9,7 @@ import { cardsData } from "./projectData";
 export type CardIndex = undefined | 1 | 2 | 3 | 4;
 
 export default function Projects() {
-  const { index, prevIndex } = useContext(PageIndexContext);
+  const { index } = useContext(PageIndexContext);
   const [selectedIndex, setSelectedIndex] = useState<CardIndex>();
   const [preventHastyClick, setPreventHastyClick] = useState(true);
 

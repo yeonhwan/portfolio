@@ -3,17 +3,6 @@
 @tailwind utilities;
 
 @layer utilities {
-  .mask-brush {
-    -webkit-mask-image: url("/svgs/brush.svg");
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-  }
-
-  .clip {
-    clip-path: url("#ellipse");
-    -webkit-clip-path: url("#ellipse");
-  }
 }
 
 @font-face {
@@ -25,20 +14,6 @@
 
   font-family: "AKROBAT";
   src: url("/fonts/Akrobat-Regular.woff2");
-}
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
 html {

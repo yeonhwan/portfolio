@@ -6,10 +6,12 @@ Command: npx gltfjsx@6.2.5 /Users/yh/Desktop/Projects/portfolio/public/models/me
 import React, { useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFBX, useAnimations } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-const Me = (props) => {
-  const group = useRef();
-  const { nodes, materials } = useGLTF("/models/me/me.glb");
+const Me = () => {
+  const group = useRef(null);
+  const { nodes, materials } = useLoader(GLTFLoader, "/models/me/me.glb");
   const loadedFBX = useFBX("/models/me/typing.fbx");
 
   loadedFBX.animations[0].name = "Typing";
@@ -22,10 +24,9 @@ const Me = (props) => {
   return (
     <group
       rotation-x={4.8}
-      position={[0, -4.2, -6.5]}
+      position={[0, -4.2, -6.2]}
       scale={8}
       ref={group}
-      {...props}
       dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh

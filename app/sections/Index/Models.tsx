@@ -154,7 +154,7 @@ const Chair = () => {
     <primitive
       scale={8}
       rotation-y={0}
-      position={[0, -4, -6.5]}
+      position={[0, -4.6, -6]}
       object={model.scene}
     />
   );

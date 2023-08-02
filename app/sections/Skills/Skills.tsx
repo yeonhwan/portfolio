@@ -19,7 +19,6 @@ export type SkillList =
   | "Tailwind"
   | "SC"
   | "Motion"
-  | "MUI"
   | "WebPack"
   | "Node"
   | "Express"
@@ -31,7 +30,6 @@ export type SkillList =
   | "Figma"
   | "VSC"
   | "TRPC"
-  | "SCSS"
   | "Zustand"
   | "ReactQuery";
 
@@ -296,6 +294,9 @@ export default function Skills() {
                           ? { scale: 1.2 }
                           : { scale: 1 }
                       }
+                      onBlur={() => {
+                        setSelectedSkill(undefined);
+                      }}
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedSkill(skill.state);

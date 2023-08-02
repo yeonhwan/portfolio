@@ -10,7 +10,7 @@ function LapTop() {
     GLTFLoader,
     "/models/scene.gltf"
   );
-  const { actions } = useAnimations(animations, group);
+  useAnimations(animations, group);
   return (
     <group ref={group} dispose={null}>
       <group name="Sketchfab_Scene">

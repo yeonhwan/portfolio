@@ -1,14 +1,10 @@
 import Models from "./Models";
-import { useProgress } from "@react-three/drei";
-
 import { useLayoutEffect, useContext } from "react";
 import { PageIndexContext } from "@/app/page";
 import { animate } from "framer-motion";
 
 export default function Index() {
-  const { index, prevIndex } = useContext(PageIndexContext);
-  const { loaded, total } = useProgress();
-  const loadComplete = loaded === total;
+  const { index } = useContext(PageIndexContext);
 
   useLayoutEffect(() => {
     if (index === 0) {
