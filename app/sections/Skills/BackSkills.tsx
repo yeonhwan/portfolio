@@ -25,13 +25,13 @@ export const backendSkills: SkillListItem[] = [
     color: "bg-indigo-700",
     state: "Prisma",
     name: "Prisma",
-    level: 1,
+    level: 2,
   },
   {
     icon: <TRPCIcon className="mobile:w-4 mobile:h-4 w-3 h-3 fill-white" />,
     color: "bg-cyan-600",
     state: "TRPC",
     name: "Trpc",
-    level: 1,
+    level: 2,
   },
 ];

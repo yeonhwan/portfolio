@@ -104,7 +104,7 @@ export const frontendSkills: SkillListItem[] = [
       <ReactQueryIcon className="mobile:w-4 mobile:h-4 w-3 h-3 fill-white" />
     ),
     color: "bg-red-600",
-    state: "Motion",
+    state: "ReactQuery",
     name: "React Query",
     level: 3,
   },

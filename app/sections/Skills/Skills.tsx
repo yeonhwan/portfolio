@@ -7,7 +7,9 @@ import { frontendSkills } from "./FrontSkills";
 import { backendSkills } from "./BackSkills";
 import { tools } from "./Tools";
 
-type StateList =
+import ToolTip from "./ToolTip";
+
+export type SkillList =
   | "HTML"
   | "CSS"
   | "JS"
@@ -36,7 +38,7 @@ type StateList =
 export type SkillListItem = {
   icon: JSX.Element;
   color: string;
-  state: StateList;
+  state: SkillList;
   name: string;
   level: 1 | 2 | 3;
 };
@@ -45,9 +47,7 @@ export type ToolListItem = Omit<SkillListItem, "level">;
 
 export default function Skills() {
   const { index, prevIndex } = useContext(PageIndexContext);
-  const [selectedIcon, setSelectedIcon] = useState<StateList>();
-  const [iconName, setIconName] = useState<string>();
-  const [iconDesc, setIconDesc] = useState<string[]>();
+  const [selectedSkill, setSelectedSkill] = useState<SkillList>();
 
   useLayoutEffect(() => {
     if (index === 2 && prevIndex === 1) {
@@ -228,19 +228,28 @@ export default function Skills() {
                 return (
                   <motion.li
                     key={`front_${index}`}
-                    className="flex flex-col w-full justify-center items-center">
+                    className="flex flex-col w-full justify-center items-center relative">
+                    {skill.level && (
+                      <ToolTip
+                        selectedSkill={selectedSkill}
+                        level={skill.level}
+                        skill={skill.state}
+                      />
+                    )}
                     <motion.span
                       tabIndex={-1}
                       animate={
-                        selectedIcon === skill.state
+                        selectedSkill === skill.state
                           ? { scale: 1.2 }
                           : { scale: 1 }
                       }
                       className={classname}
+                      onBlur={() => {
+                        setSelectedSkill(undefined);
+                      }}
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSelectedIcon(skill.state);
-                        setIconName(skill.name);
+                        setSelectedSkill(skill.state);
                         const descContainerEl = document.querySelector(
                           ".desc"
                         ) as HTMLElement;
@@ -273,19 +282,23 @@ export default function Skills() {
                 return (
                   <motion.li
                     key={`back_${index}`}
-                    className="flex flex-col w-full justify-center items-center">
+                    className="flex flex-col w-full justify-center items-center relative">
+                    <ToolTip
+                      selectedSkill={selectedSkill}
+                      level={skill.level}
+                      skill={skill.state}
+                    />
                     <motion.span
                       tabIndex={-1}
                       className={classname}
                       animate={
-                        selectedIcon === skill.state
+                        selectedSkill === skill.state
                           ? { scale: 1.2 }
                           : { scale: 1 }
                       }
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSelectedIcon(skill.state);
-                        setIconName(skill.name);
+                        setSelectedSkill(skill.state);
                         const descContainerEl = document.querySelector(
                           ".desc"
                         ) as HTMLElement;
@@ -314,35 +327,12 @@ export default function Skills() {
             </p>
             <ul className="grid w-full h-full grid-cols-skills items-center justify-items-center moible:gap-x-3 gap-y-2">
               {tools.map((skill, index) => {
-                const classname = `tool-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1 hover:cursor-pointer`;
+                const classname = `tool-item flex items-center justify-center rounded-full w-5 h-5 mobile:w-7 mobile:h-7 ${skill.color} mb-1`;
                 return (
                   <motion.li
                     key={`tool_${index}`}
                     className="flex flex-col w-full justify-center items-center">
-                    <motion.span
-                      tabIndex={-1}
-                      className={classname}
-                      animate={
-                        selectedIcon === skill.state
-                          ? { scale: 1.2 }
-                          : { scale: 1 }
-                      }
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSelectedIcon(skill.state);
-                        setIconName(skill.name);
-                        const descContainerEl = document.querySelector(
-                          ".desc"
-                        ) as HTMLElement;
-                        if (descContainerEl) {
-                          descContainerEl.focus();
-                        }
-                      }}
-                      whileHover={{
-                        scale: 1.2,
-                        rotate: [0, -10, 10, 0],
-                        transition: { duration: 0.3 },
-                      }}>
+                    <motion.span className={classname}>
                       {skill.icon}
                     </motion.span>
                     <p className="sm:text-xs text-[8px] w-full text-center front-item">
