@@ -2,7 +2,6 @@ import { animate, AnimatePresence, motion, stagger } from "framer-motion";
 import { useLayoutEffect, useState, useEffect } from "react";
 
 import { useContext } from "react";
-import { PageIndexContext } from "@/app/page";
 import { frontendSkills } from "./FrontSkills";
 import { backendSkills } from "./BackSkills";
 import { tools } from "./Tools";
@@ -43,8 +42,10 @@ export type SkillListItem = {
 
 export type ToolListItem = Omit<SkillListItem, "level">;
 
-export default function Skills() {
-  const { index, prevIndex } = useContext(PageIndexContext);
+import { type SectionProps } from "../Index/Index";
+
+export default function Skills({ IndexContext }: SectionProps) {
+  const { index, prevIndex } = useContext(IndexContext);
   const [selectedSkill, setSelectedSkill] = useState<SkillList>();
 
   useLayoutEffect(() => {

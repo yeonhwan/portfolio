@@ -1,10 +1,16 @@
 import Models from "./Models";
-import { useLayoutEffect, useContext } from "react";
-import { PageIndexContext } from "@/app/page";
+import { useLayoutEffect, useContext, type Context } from "react";
 import { animate } from "framer-motion";
 
-export default function Index() {
-  const { index } = useContext(PageIndexContext);
+export type SectionProps = {
+  IndexContext: Context<{
+    prevIndex: number;
+    index: number;
+  }>;
+};
+
+export default function Index({ IndexContext }: SectionProps) {
+  const { index } = useContext(IndexContext);
 
   useLayoutEffect(() => {
     if (index === 0) {
@@ -58,7 +64,7 @@ export default function Index() {
         </span>
       </p>
       <div className="absolute bottom-10 left-0 w-full h-[80%] sm:h-[90%] md:h-full">
-        <Models />
+        <Models IndexContext={IndexContext} />
       </div>
     </div>
   );

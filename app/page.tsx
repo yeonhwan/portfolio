@@ -7,14 +7,14 @@ import Skills from "./sections/Skills/Skills";
 import Projects from "./sections/Projects/Projects";
 
 // hooks
-import { useState, useEffect, useRef, Touch } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDebounce } from "./hooks/useDebounce";
 import { createContext } from "react";
 
 // svg
 import YH from "public/YH.svg";
 
-export const PageIndexContext = createContext({ prevIndex: 0, index: 0 });
+const IndexContext = createContext({ prevIndex: 0, index: 0 });
 
 export default function Home() {
   const [index, setIndex] = useState<0 | 1 | 2 | 3>(0);
@@ -70,22 +70,8 @@ export default function Home() {
       setIndex((state) => (state === 0 ? 0 : state - 1) as 0 | 1 | 2 | 3);
     }
   };
-  const debouncedScrollCallback = useDebounce<WheelEvent>(scrollCallback, 500);
-
-  document.addEventListener(
-    "wheel",
-    (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.deltaY !== 0 && e.deltaY !== -0) {
-        debouncedScrollCallback(e);
-      }
-    },
-    { passive: false }
-  );
 
   // scroll event callback using touch devices (moving screen slider)
-
   const touchStartCallback = (e: TouchEvent) => {
     const startPoint = e.changedTouches[0].screenY;
     touchEventYStartPoint.current = startPoint;
@@ -103,6 +89,8 @@ export default function Home() {
       }
     }
   };
+
+  const debouncedScrollCallback = useDebounce<WheelEvent>(scrollCallback, 500);
   const debouncedTouchStartCallback = useDebounce<TouchEvent>(
     touchStartCallback,
     500
@@ -112,12 +100,26 @@ export default function Home() {
     500
   );
 
-  document.addEventListener("touchstart", (e) => {
-    debouncedTouchStartCallback(e);
-  });
-  document.addEventListener("touchend", (e) => {
-    debouncedTouchEndCallback(e);
-  });
+  useEffect(() => {
+    document.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.deltaY !== 0 && e.deltaY !== -0) {
+          debouncedScrollCallback(e);
+        }
+      },
+      { passive: false }
+    );
+
+    document.addEventListener("touchstart", (e) => {
+      debouncedTouchStartCallback(e);
+    });
+    document.addEventListener("touchend", (e) => {
+      debouncedTouchEndCallback(e);
+    });
+  }, []);
 
   return (
     <main
@@ -165,13 +167,12 @@ export default function Home() {
           </p>
         </div>
       </header>
-      <PageIndexContext.Provider
-        value={{ index, prevIndex: prevIndex.current }}>
-        {mountedPageIndex === 0 && <Index />}
-        {mountedPageIndex === 1 && <AboutMe />}
-        {mountedPageIndex === 2 && <Skills />}
-        {mountedPageIndex === 3 && <Projects />}
-      </PageIndexContext.Provider>
+      <IndexContext.Provider value={{ index, prevIndex: prevIndex.current }}>
+        {mountedPageIndex === 0 && <Index IndexContext={IndexContext} />}
+        {mountedPageIndex === 1 && <AboutMe IndexContext={IndexContext} />}
+        {mountedPageIndex === 2 && <Skills IndexContext={IndexContext} />}
+        {mountedPageIndex === 3 && <Projects IndexContext={IndexContext} />}
+      </IndexContext.Provider>
     </main>
   );
 }

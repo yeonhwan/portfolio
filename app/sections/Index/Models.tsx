@@ -7,7 +7,7 @@ import { motion } from "framer-motion-3d";
 import Me from "./Me";
 import { Suspense, useLayoutEffect } from "react";
 import { useContext } from "react";
-import { PageIndexContext } from "@/app/page";
+import { type SectionProps } from "./Index";
 
 const Macbook = () => {
   const model = useLoader(GLTFLoader, "/models/macbook/scene.gltf");
@@ -244,8 +244,8 @@ const Floor = () => {
   );
 };
 
-export default function Models() {
-  const { index } = useContext(PageIndexContext);
+export default function Models({ IndexContext }: SectionProps) {
+  const { index } = useContext(IndexContext);
 
   const variants = {
     out: {

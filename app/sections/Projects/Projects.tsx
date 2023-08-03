@@ -1,15 +1,15 @@
 import { useLayoutEffect, useState } from "react";
 import { animate, stagger, motion } from "framer-motion";
 import { useContext } from "react";
-import { PageIndexContext } from "@/app/page";
 
 import Card from "./Card";
 import { cardsData } from "./projectData";
+import { type SectionProps } from "../Index/Index";
 
 export type CardIndex = undefined | 1 | 2 | 3 | 4;
 
-export default function Projects() {
-  const { index } = useContext(PageIndexContext);
+export default function Projects({ IndexContext }: SectionProps) {
+  const { index } = useContext(IndexContext);
   const [selectedIndex, setSelectedIndex] = useState<CardIndex>();
   const [preventHastyClick, setPreventHastyClick] = useState(true);
 

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { PageIndexContext } from "@/app/page";
 import { stagger } from "framer-motion";
 
 import { useLayoutEffect } from "react";
@@ -11,8 +10,10 @@ import Email from "public/icons/email.svg";
 import Github from "public/icons/github.svg";
 import Velog from "public/icons/velog.svg";
 
-export default function AboutMe() {
-  const { index, prevIndex } = useContext(PageIndexContext);
+import type { SectionProps } from "../Index/Index";
+
+export default function AboutMe({ IndexContext }: SectionProps) {
+  const { index, prevIndex } = useContext(IndexContext);
 
   useLayoutEffect(() => {
     if (index === 1 && prevIndex === 0) {
